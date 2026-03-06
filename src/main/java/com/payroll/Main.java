@@ -6,8 +6,7 @@ public class Main {
 
         EmployeePayrollService service = new EmployeePayrollService();
 
-        service.updateEmployeeSalaryPrepared("Bill", 3500000);
+        service.getEmployeeByDate("2019-01-01");
 
-        service.readEmployeeData();
     }
 }

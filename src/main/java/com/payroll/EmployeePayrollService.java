@@ -77,4 +77,29 @@ public class EmployeePayrollService {
             e.printStackTrace();
         }
     }
+
+    public void getEmployeeByDate(String startDate) {
+
+        String query = "SELECT * FROM employee_payroll WHERE start_date BETWEEN ? AND CURDATE()";
+
+        try (Connection connection = this.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setString(1, startDate);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                double salary = resultSet.getDouble("salary");
+
+                System.out.println(id + " | " + name + " | " + salary);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
