@@ -41,4 +41,20 @@ public class EmployeePayrollService {
             e.printStackTrace();
         }
     }
+
+    public void updateEmployeeSalary(String name, double salary) {
+
+        String query = "UPDATE employee_payroll SET salary = " + salary + " WHERE name = '" + name + "'";
+
+        try (Connection connection = this.getConnection();
+             Statement statement = connection.createStatement()) {
+
+            int rowsAffected = statement.executeUpdate(query);
+
+            System.out.println("Rows Updated: " + rowsAffected);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
