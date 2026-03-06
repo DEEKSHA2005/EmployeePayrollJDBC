@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
+import java.sql.PreparedStatement;
 
 public class EmployeePayrollService {
 
@@ -50,6 +51,25 @@ public class EmployeePayrollService {
              Statement statement = connection.createStatement()) {
 
             int rowsAffected = statement.executeUpdate(query);
+
+            System.out.println("Rows Updated: " + rowsAffected);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateEmployeeSalaryPrepared(String name, double salary) {
+
+        String query = "UPDATE employee_payroll SET salary = ? WHERE name = ?";
+
+        try (Connection connection = this.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setDouble(1, salary);
+            preparedStatement.setString(2, name);
+
+            int rowsAffected = preparedStatement.executeUpdate();
 
             System.out.println("Rows Updated: " + rowsAffected);
 

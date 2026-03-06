@@ -6,9 +6,8 @@ public class Main {
 
         EmployeePayrollService service = new EmployeePayrollService();
 
-        service.updateEmployeeSalary("Bill", 3000000);
+        service.updateEmployeeSalaryPrepared("Bill", 3500000);
 
         service.readEmployeeData();
-
     }
 }
