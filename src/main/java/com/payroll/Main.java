@@ -6,7 +6,7 @@ public class Main {
 
         EmployeePayrollService service = new EmployeePayrollService();
 
-        service.getEmployeeByDate("2019-01-01");
+        service.getSalaryStatisticsByGender();
 
     }
 }

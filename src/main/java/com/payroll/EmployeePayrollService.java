@@ -102,4 +102,36 @@ public class EmployeePayrollService {
             e.printStackTrace();
         }
     }
+
+    public void getSalaryStatisticsByGender() {
+
+        String query = "SELECT gender, SUM(salary), AVG(salary), MIN(salary), MAX(salary), COUNT(*) " +
+                "FROM employee_payroll GROUP BY gender";
+
+        try (Connection connection = this.getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(query)) {
+
+            while (resultSet.next()) {
+
+                String gender = resultSet.getString(1);
+                double sum = resultSet.getDouble(2);
+                double avg = resultSet.getDouble(3);
+                double min = resultSet.getDouble(4);
+                double max = resultSet.getDouble(5);
+                int count = resultSet.getInt(6);
+
+                System.out.println("Gender: " + gender);
+                System.out.println("Total Salary: " + sum);
+                System.out.println("Average Salary: " + avg);
+                System.out.println("Minimum Salary: " + min);
+                System.out.println("Maximum Salary: " + max);
+                System.out.println("Employee Count: " + count);
+                System.out.println("---------------------------");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
