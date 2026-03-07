@@ -134,4 +134,25 @@ public class EmployeePayrollService {
             e.printStackTrace();
         }
     }
+
+    public void addEmployee(String name, String gender, double salary, String startDate) {
+
+        String query = "INSERT INTO employee_payroll(name, gender, salary, start_date) VALUES (?, ?, ?, ?)";
+
+        try (Connection connection = this.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setString(1, name);
+            preparedStatement.setString(2, gender);
+            preparedStatement.setDouble(3, salary);
+            preparedStatement.setString(4, startDate);
+
+            int rowsInserted = preparedStatement.executeUpdate();
+
+            System.out.println("Employee Added: " + rowsInserted);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
